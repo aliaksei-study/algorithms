@@ -41,7 +41,8 @@ public class Heap {
             largestElementIndex = leftChildIndex;
         }
 
-        if (rightChildIndex < maxHeapSize && array[rightChildIndex] > array[index]) {
+        if (rightChildIndex < maxHeapSize && array[rightChildIndex] > array[index]
+                && array[rightChildIndex] > array[leftChildIndex]) {
             largestElementIndex = rightChildIndex;
         }
 
