@@ -1,14 +1,14 @@
 package com.heap;
 
-public class Heap {
-    private int[] array;
+public class PairedHeap {
+    private Pair[] array;
     private int maxHeapSize;
 
-    public Heap(int[] array) {
+    public PairedHeap(Pair[] array) {
         this.array = array;
     }
 
-    public int[] getArray() {
+    public Pair[] getArray() {
         return array;
     }
 
@@ -32,37 +32,18 @@ public class Heap {
         return 2 * index + 2;
     }
 
-    public void maxHeapify(int index) {
-        int largestElementIndex = index;
-        int leftChildIndex = getLeftChild(index);
-        int rightChildIndex = getRightChild(index);
-
-        if (leftChildIndex < maxHeapSize && array[leftChildIndex] > array[index]) {
-            largestElementIndex = leftChildIndex;
-        }
-
-        if (rightChildIndex < maxHeapSize && array[rightChildIndex] > array[index]
-                && array[rightChildIndex] > array[leftChildIndex]) {
-            largestElementIndex = rightChildIndex;
-        }
-
-        if (largestElementIndex != index) {
-            swap(index, largestElementIndex);
-            maxHeapify(largestElementIndex);
-        }
-    }
 
     public void minHeapify(int index) {
         int smallestElementIndex = index;
         int leftChildIndex = getLeftChild(index);
         int rightChildIndex = getRightChild(index);
 
-        if (leftChildIndex < maxHeapSize && array[leftChildIndex] < array[index]) {
+        if (leftChildIndex < maxHeapSize && array[leftChildIndex].value < array[index].value) {
             smallestElementIndex = leftChildIndex;
         }
 
-        if (rightChildIndex < maxHeapSize && array[rightChildIndex] < array[index]
-                && array[rightChildIndex] > array[leftChildIndex]) {
+        if (rightChildIndex < maxHeapSize && array[rightChildIndex].value < array[index].value
+                && array[rightChildIndex].value < array[leftChildIndex].value) {
             smallestElementIndex = rightChildIndex;
         }
 
@@ -80,15 +61,8 @@ public class Heap {
     }
 
     public void swap(int sourceIndex, int destinationIndex) {
-        int temp = array[sourceIndex];
+        Pair temp = array[sourceIndex];
         array[sourceIndex] = array[destinationIndex];
         array[destinationIndex] = temp;
-    }
-
-    public void buildMaxHeap() {
-        this.maxHeapSize = this.array.length;
-        for (int i = (array.length - 1) / 2; i >= 0; i--) {
-            maxHeapify(i);
-        }
     }
 }
