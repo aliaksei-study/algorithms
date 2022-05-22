@@ -12,6 +12,7 @@ public class Main {
         System.out.println(Arrays.toString(Arrays.stream(testArray).toArray()));
 
         priorityQueue.maxHeapInsert(20);
+        priorityQueue.maxHeapDelete(3);
         System.out.println(Arrays.toString(Arrays.stream(testArray).toArray()));
     }
 }

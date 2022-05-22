@@ -31,4 +31,10 @@ public class MaxPriorityQueue extends Heap {
         super.getArray()[super.getMaxHeapSize() - 1] = value;
         heapIncreaseKey(super.getMaxHeapSize() - 1, value);
     }
+
+    public void maxHeapDelete(int index) {
+        super.swap(index, super.getMaxHeapSize() - 1);
+        super.setMaxHeapSize(super.getMaxHeapSize() - 1);
+        super.maxHeapify(index);
+    }
 }
