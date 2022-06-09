@@ -18,6 +18,29 @@ public class Main {
         return i + 1;
     }
 
+    public static int hoarePartition(int[] array, int left, int right) {
+        int pivot = array[left];
+        int i = left;
+        int j = right + 1;
+
+        while (i < j) {
+            do {
+                i++;
+            } while (pivot >= array[i]);
+
+            do {
+                j--;
+            } while (pivot < array[j]);
+
+            if(i < j) {
+                swap(array, i, j);
+            }
+        }
+
+        swap(array, left, j);
+        return j;
+    }
+
     public static void swap(int[] array, int sourceIndex, int destinationIndex) {
         int temp = array[sourceIndex];
         array[sourceIndex] = array[destinationIndex];
@@ -26,7 +49,7 @@ public class Main {
 
     public static void quicksort(int[] array, int left, int right) {
         if (left < right) {
-            int partitionIndex = partition(array, left, right);
+            int partitionIndex = hoarePartition(array, left, right);
             quicksort(array, left, partitionIndex - 1);
             quicksort(array, partitionIndex + 1, right);
         }
