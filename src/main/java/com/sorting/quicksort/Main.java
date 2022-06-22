@@ -1,6 +1,7 @@
 package com.sorting.quicksort;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
 
@@ -16,6 +17,13 @@ public class Main {
         }
         swap(array, i + 1, right);
         return i + 1;
+    }
+
+    public static int randomizedPartition(int[] array, int min, int max) {
+        Random random = new Random();
+        int randomNumberInBorders = random.nextInt(max) + min;
+        swap(array, max, randomNumberInBorders);
+        return hoarePartition(array, min, max);
     }
 
     public static int hoarePartition(int[] array, int left, int right) {
