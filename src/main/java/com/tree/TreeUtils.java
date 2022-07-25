@@ -37,7 +37,7 @@ public class TreeUtils {
         }
     }
 
-    public static void insert(TreeNode root, TreeNode newNode) {
+    public static TreeNode insert(TreeNode root, TreeNode newNode) {
         TreeNode newNodeParent = root;
         TreeNode currentNode = root;
 
@@ -56,6 +56,8 @@ public class TreeUtils {
         } else {
             newNodeParent.rightChild = newNode;
         }
+
+        return newNode;
     }
 
     public static TreeNode search(TreeNode root, int key) {
@@ -84,5 +86,65 @@ public class TreeUtils {
             currentElement = currentElement.rightChild;
         }
         return currentElement;
+    }
+
+    public static TreeNode successor(TreeNode element) {
+        if(element.rightChild != null) {
+            return treeMinimum(element.rightChild);
+        }
+
+        TreeNode elementParent = element.parent;
+        while(elementParent != null && elementParent.rightChild == element) {
+            element = elementParent;
+            elementParent = elementParent.parent;
+        }
+        return elementParent;
+    }
+
+    public static TreeNode predecessor(TreeNode element) {
+        return treeMaximum(element.leftChild);
+    }
+
+    public static void delete(TreeNode element) {
+        TreeNode parent = element.parent;
+
+        if(element.rightChild == null && element.leftChild == null && parent != null) {
+            if(parent.leftChild != null && parent.leftChild.equals(element)) {
+                parent.leftChild = null;
+            } else {
+                parent.rightChild = null;
+            }
+        } else if(element.rightChild == null && parent != null) {
+            if(parent.leftChild != null && parent.leftChild.equals(element)) {
+                parent.leftChild = element.leftChild;
+                element.leftChild.parent = parent;
+            } else if(parent.rightChild != null) {
+                parent.rightChild = element.leftChild;
+            }
+        } else if(element.leftChild == null && parent != null) {
+            if(parent.leftChild != null && parent.leftChild.equals(element)) {
+                parent.leftChild = element.rightChild;
+            } else {
+                parent.rightChild = element.rightChild;
+                element.rightChild.parent = parent;
+            }
+        } else {
+            TreeNode successor = successor(element);
+            if(!successor.parent.equals(element) && successor.rightChild != null) {
+                if(successor.parent.leftChild != null && successor.parent.leftChild.equals(successor)) {
+                    successor.parent.leftChild = successor.rightChild;
+                } else {
+                    successor.parent.rightChild = successor.rightChild;
+                }
+                successor.rightChild.parent = successor.parent;
+            }
+
+            if(parent.leftChild != null && parent.leftChild.equals(element)) {
+                parent.leftChild = successor;
+            } else {
+                parent.rightChild = successor;
+            }
+            successor.parent = parent;
+        }
     }
 }

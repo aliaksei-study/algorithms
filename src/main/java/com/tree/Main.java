@@ -45,12 +45,18 @@ public class Main {
         TreeUtils.insert(root, new TreeNode(5));
         TreeUtils.insert(root, new TreeNode(18));
         TreeUtils.insert(root, new TreeNode(2));
-        TreeUtils.insert(root, new TreeNode(9));
+        TreeNode successor1 = TreeUtils.insert(root, new TreeNode(9));
         TreeUtils.insert(root, new TreeNode(15));
         TreeUtils.insert(root, new TreeNode(19));
         TreeUtils.insert(root, new TreeNode(13));
         TreeUtils.insert(root, new TreeNode(17));
+        TreeUtils.insert(root, new TreeNode(14));
+//        System.out.println(TreeUtils.search(root, 6));
+//        System.out.println(TreeUtils.successor(successor1));
+//        System.out.println(TreeUtils.predecessor(root));
 
-        System.out.println(TreeUtils.search(root, 6));
+        TreeUtils.delete(successor1);
+        System.out.println(1);
+
     }
 }
