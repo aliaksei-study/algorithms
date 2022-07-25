@@ -74,7 +74,7 @@ public class TreeUtils {
 
     public static TreeNode treeMinimum(TreeNode root) {
         TreeNode currentElement = root;
-        while(currentElement.leftChild != null) {
+        while (currentElement.leftChild != null) {
             currentElement = currentElement.leftChild;
         }
         return currentElement;
@@ -82,19 +82,19 @@ public class TreeUtils {
 
     public static TreeNode treeMaximum(TreeNode root) {
         TreeNode currentElement = root;
-        while(currentElement.rightChild != null) {
+        while (currentElement.rightChild != null) {
             currentElement = currentElement.rightChild;
         }
         return currentElement;
     }
 
     public static TreeNode successor(TreeNode element) {
-        if(element.rightChild != null) {
+        if (element.rightChild != null) {
             return treeMinimum(element.rightChild);
         }
 
         TreeNode elementParent = element.parent;
-        while(elementParent != null && elementParent.rightChild == element) {
+        while (elementParent != null && elementParent.rightChild == element) {
             element = elementParent;
             elementParent = elementParent.parent;
         }
@@ -108,21 +108,21 @@ public class TreeUtils {
     public static void delete(TreeNode element) {
         TreeNode parent = element.parent;
 
-        if(element.rightChild == null && element.leftChild == null && parent != null) {
-            if(parent.leftChild != null && parent.leftChild.equals(element)) {
+        if (element.rightChild == null && element.leftChild == null) {
+            if (parent.leftChild != null && parent.leftChild.equals(element)) {
                 parent.leftChild = null;
             } else {
                 parent.rightChild = null;
             }
-        } else if(element.rightChild == null && parent != null) {
-            if(parent.leftChild != null && parent.leftChild.equals(element)) {
+        } else if (element.rightChild == null) {
+            if (parent.leftChild != null && parent.leftChild.equals(element)) {
                 parent.leftChild = element.leftChild;
                 element.leftChild.parent = parent;
-            } else if(parent.rightChild != null) {
+            } else if (parent.rightChild != null) {
                 parent.rightChild = element.leftChild;
             }
-        } else if(element.leftChild == null && parent != null) {
-            if(parent.leftChild != null && parent.leftChild.equals(element)) {
+        } else if (element.leftChild == null) {
+            if (parent.leftChild != null && parent.leftChild.equals(element)) {
                 parent.leftChild = element.rightChild;
             } else {
                 parent.rightChild = element.rightChild;
@@ -130,16 +130,13 @@ public class TreeUtils {
             }
         } else {
             TreeNode successor = successor(element);
-            if(!successor.parent.equals(element) && successor.rightChild != null) {
-                if(successor.parent.leftChild != null && successor.parent.leftChild.equals(successor)) {
-                    successor.parent.leftChild = successor.rightChild;
-                } else {
-                    successor.parent.rightChild = successor.rightChild;
-                }
+            if (!successor.parent.equals(element) && successor.rightChild != null) {
+                successor.parent.leftChild = successor.rightChild;
                 successor.rightChild.parent = successor.parent;
             }
-
-            if(parent.leftChild != null && parent.leftChild.equals(element)) {
+            successor.rightChild = element.rightChild;
+            successor.leftChild = element.leftChild;
+            if (parent.leftChild != null && parent.leftChild.equals(element)) {
                 parent.leftChild = successor;
             } else {
                 parent.rightChild = successor;

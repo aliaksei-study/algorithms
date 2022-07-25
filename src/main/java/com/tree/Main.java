@@ -43,19 +43,20 @@ public class Main {
 
         TreeNode root = new TreeNode(12);
         TreeUtils.insert(root, new TreeNode(5));
-        TreeUtils.insert(root, new TreeNode(18));
+        TreeNode deletedElement = TreeUtils.insert(root, new TreeNode(18));
         TreeUtils.insert(root, new TreeNode(2));
         TreeNode successor1 = TreeUtils.insert(root, new TreeNode(9));
         TreeUtils.insert(root, new TreeNode(15));
-        TreeUtils.insert(root, new TreeNode(19));
+        TreeUtils.insert(root, new TreeNode(24));
         TreeUtils.insert(root, new TreeNode(13));
         TreeUtils.insert(root, new TreeNode(17));
-        TreeUtils.insert(root, new TreeNode(14));
+        TreeUtils.insert(root, new TreeNode(19));
+        TreeUtils.insert(root, new TreeNode(21));
 //        System.out.println(TreeUtils.search(root, 6));
 //        System.out.println(TreeUtils.successor(successor1));
 //        System.out.println(TreeUtils.predecessor(root));
 
-        TreeUtils.delete(successor1);
+        TreeUtils.delete(deletedElement);
         System.out.println(1);
 
     }
