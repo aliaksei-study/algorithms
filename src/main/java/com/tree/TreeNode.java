@@ -12,4 +12,8 @@ public class TreeNode {
         this.rightChild = rightChild;
         this.parent = parent;
     }
+
+    public TreeNode(int key) {
+        this.key = key;
+    }
 }
