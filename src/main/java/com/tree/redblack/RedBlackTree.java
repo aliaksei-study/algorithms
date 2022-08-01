@@ -57,4 +57,28 @@ public class RedBlackTree {
             node.right.parent = node;
         }
     }
+
+    public void rightRotate(RedBlackTreeNode node) {
+        if(node.left != null) {
+            if(node.parent != null) {
+                node.left.parent = node.parent;
+                if(node.parent.right.equals(node)) {
+                    node.parent.right = node.left;
+                } else {
+                    node.parent.left = node.left;
+                }
+            } else {
+                node.left.parent = null;
+                this.root = node.left;
+            }
+            node.parent = node.left;
+
+            RedBlackTreeNode rightChildOfLeftNode = node.left.right;
+            node.left.right = node;
+            node.left = rightChildOfLeftNode;
+            if(node.left != null) {
+                node.left.parent = node;
+            }
+        }
+    }
 }
