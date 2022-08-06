@@ -11,6 +11,10 @@ public class RedBlackTreeNode {
         this.key = key;
     }
 
+    public RedBlackTreeNode(Color color) {
+        this.color = color;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(obj == null) {
